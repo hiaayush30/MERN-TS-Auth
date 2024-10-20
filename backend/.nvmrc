@@ -1,0 +1,7 @@
+22.9.0
+
+/*The .nvmrc file is a configuration file used in projects to specify the version
+of Node.js that the project is designed to work with.*/ 
+/*nvm use to swith to this version
+nvm install to install the specified version if not done*/
+
