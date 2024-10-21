@@ -10,10 +10,12 @@ type AsyncController = (
 ) => Promise<any>
 
 export const catchErrors = (controller: AsyncController): AsyncController => {
-    return async (req, res, next) => {
+    return async (req, res, next) => {  //will be provided by express
         try {
             await controller(req, res, next)
-        } catch (err) {
+            //if promise rejects(error thrown) catch block will handle it 
+            //else nothing will happen
+        } catch (err) { 
             next(err)
         }
     }

@@ -5,12 +5,13 @@ import express from 'express'
 const app = express();
 
 import { connectToDatabase } from './config/db';
+connectToDatabase();
 import { APP_ORIGIN, NODE_ENV, PORT } from './constants/env';
 import cookieParser from 'cookie-parser';
 import { errorHandler } from './middleware/errorHandler';
 import { catchErrors } from './utils/catchErrors';
 import { OK } from './constants/http';
-connectToDatabase();
+import authRouter from './routes/authRoutes';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
@@ -23,6 +24,7 @@ app.use(cors({
 }));
 app.use(cookieParser())
 
+// app.get('/health',(req,res)=>{throw new Error('wassup')}) //this will get handled
 // app.get('/health',async (req,res,next)=>{  
 // throw new Error('wassup')
 // The throw inside the async function creates a rejected promise.
@@ -39,12 +41,15 @@ app.use(cookieParser())
 // })
 
 //using a utility function
-app.get('/health', catchErrors(async (req, res, next) => {
+app.get('/health', catchErrors(async (req, res, next ) => {
     // throw new Error('wassup');
     res.status(OK).json({
         message: "we are on"
     })
 }))
+
+
+app.use('/auth',authRouter)
 
 app.use(errorHandler)
 
