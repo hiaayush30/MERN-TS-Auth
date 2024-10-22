@@ -23,7 +23,7 @@ export const registerHandler=catchErrors(async (req,res,next)=>{
            userAgent:req.headers["user-agent"]
         })
         const {user,accessToken,refreshToken} =await createAccount(request);
-        setAuthCookies({res,accessToken,refreshToken})
+        return setAuthCookies({res,accessToken,refreshToken})
         .status(CREATED)
         .json(user)  
 })
