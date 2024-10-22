@@ -22,16 +22,11 @@ const verificationSchema=new mongoose.Schema<VerificationDocument>({
         type:String,
         required:true
       },
-      createdAt:{
-        type:Date,
-        required:true,
-        default:Date.now
-      },
       expiresAt:{
         type:Date,
         required:true
       }
-})
+},{timestamps:true})
 
 const VerificationModel=mongoose.model<VerificationDocument>(
     'verification',
