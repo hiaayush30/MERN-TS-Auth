@@ -14,4 +14,4 @@ export type httpStatusCode=
 typeof CREATED|typeof OK|typeof BAD_REQUEST
 |typeof FORBIDDEN |typeof NOT_FOUND |typeof CONFLICT
 |typeof UNPROCESSABLE_CONTENT |typeof TOO_MANY_REQUESTS
-|typeof INTERNAL_SERVER_ERROR
+|typeof INTERNAL_SERVER_ERROR | typeof UNAUTHORIZED

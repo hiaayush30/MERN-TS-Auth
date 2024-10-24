@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema<UserDocument>({
 
 //on user schema we can define hooks which will run before the events occur
 userSchema.pre('save',async function(next){
-    if(!this.isModified(this.password)){
+    if(!this.isModified("password")){
         //if the password has not been modified
         //no need to run the hash function
         next();
