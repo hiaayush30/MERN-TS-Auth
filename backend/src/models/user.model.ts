@@ -7,7 +7,10 @@ interface UserDocument extends mongoose.Document {
     verified: boolean;
     createdAt: Date;
     updatedAt: Date;
-    comparePassword(val: string): Promise<boolean>
+    comparePassword(val: string): Promise<boolean>,
+    omitPassword():Pick<UserDocument,
+    "_id" | "email" | "verified" | "createdAt" | "updatedAt" 
+    >;
 }
 //mongoose.document already contains properties like _id and methods like save(),
 // populate() etc
@@ -44,6 +47,12 @@ userSchema.pre('save',async function(next){
 userSchema.methods.comparePassword=async function(val:string){
     return await compareValue(val,this.password)
 }
+
+userSchema.methods.omitPassword=function(){
+    const obj=this.toObject();  //built in method in mongoose to convert doc to object
+    delete obj.password;
+    return obj;  
+} 
 
 const UserModel=mongoose.model<UserDocument>('User',userSchema);
 // here userDocument ensures that the documents created from the schema have the same
